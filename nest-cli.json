@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/azion-templates/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/azion-templates/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/azion-templates",
+  "projects": {
+    "azion-templates": {
+      "type": "application",
+      "root": "apps/azion-templates",
+      "entryFile": "main",
+      "sourceRoot": "apps/azion-templates/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/azion-templates/tsconfig.app.json"
+      }
+    },
+    "wordpress": {
+      "type": "application",
+      "root": "apps/wordpress",
+      "entryFile": "main",
+      "sourceRoot": "apps/wordpress/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/wordpress/tsconfig.app.json"
+      }
+    },
+    "sdk": {
+      "type": "library",
+      "root": "libs/sdk",
+      "entryFile": "index",
+      "sourceRoot": "libs/sdk/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/sdk/tsconfig.lib.json"
+      }
+    },
+    "azion-sdk": {
+      "type": "library",
+      "root": "libs/azion-sdk",
+      "entryFile": "index",
+      "sourceRoot": "libs/azion-sdk/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/azion-sdk/tsconfig.lib.json"
+      }
+    }
+  }
+}
