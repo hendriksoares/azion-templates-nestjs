@@ -1,5 +1,4 @@
-import { CacheSettings } from 'src/@shared/enums/cache-settings.enum';
-import { CacheStatus } from 'src/@shared/enums/cache-status.enum';
+import { CacheSettings, CacheStatus } from '@azion/sdk/common/enum';
 
 export class CacheCreateDto {
   name: string;

@@ -34,7 +34,7 @@ export class CacheService extends BaseService {
    * @param id string
    * @returns Promise<CacheDto>
    */
-  async find_by_edge(id: string): Promise<CacheCreateDto[]> {
+  async find_by_edge(id: string): Promise<CacheDto[]> {
     const url = this.url.replace(':edge_application_id', id);
     const result = await firstValueFrom(
       this.http.get(url, this.config).pipe(map((x) => x.data.results)),
