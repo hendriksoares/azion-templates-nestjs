@@ -1,22 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EdgeService } from './edge.service';
+import { CacheService } from './cache.service';
 import { HttpModule, HttpService } from '@nestjs/axios';
-import { EdgeApplicationCreateDto, EdgeApplicationUpdateDto } from './dtos';
-import { map, of } from 'rxjs';
+import { of } from 'rxjs';
+import { CacheCreateDto } from './dtos/create.dto';
+import { CacheUpdateDto } from './dtos/update.dto';
 
-describe('# EdgeService', () => {
-  let service: EdgeService;
+describe('# CacheService', () => {
+  let service: CacheService;
   let http: HttpService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule],
-      providers: [EdgeService],
+      providers: [CacheService],
     })
       .overrideProvider(HttpService)
       .useValue({
         post: jest.fn().mockReturnValue({
-          pipe: jest.fn().mockReturnValue(of(map((x: any) => x.data.results))),
+          pipe: jest.fn().mockReturnValue(of({})),
         }),
         get: jest.fn().mockReturnValue({
           pipe: jest.fn().mockReturnValue(of({})),
@@ -28,10 +29,9 @@ describe('# EdgeService', () => {
           pipe: jest.fn().mockReturnValue(of({})),
         }),
       })
-
       .compile();
 
-    service = module.get<EdgeService>(EdgeService);
+    service = module.get<CacheService>(CacheService);
     http = module.get<HttpService>(HttpService);
   });
 
@@ -45,6 +45,9 @@ describe('# EdgeService', () => {
     it('find one should be defined', () => {
       expect(service.find_one);
     });
+    it('find by edge should be defined', () => {
+      expect(service.find_by_edge);
+    });
     it('update should be defined', () => {
       expect(service.update);
     });
@@ -55,7 +58,7 @@ describe('# EdgeService', () => {
 
   describe('## Create', () => {
     beforeEach(async () => {
-      await service.create({} as EdgeApplicationCreateDto);
+      await service.create({} as CacheCreateDto, '');
     });
     it('should be call external post api', () => {
       expect(http.post).toBeCalled();
@@ -64,7 +67,7 @@ describe('# EdgeService', () => {
 
   describe('## FindOne', () => {
     beforeEach(async () => {
-      await service.find_one('');
+      await service.find_one('', '');
     });
     it('should be call external get api', () => {
       expect(http.get).toBeCalled();
@@ -73,7 +76,7 @@ describe('# EdgeService', () => {
 
   describe('## Update', () => {
     beforeEach(async () => {
-      await service.update({} as EdgeApplicationUpdateDto);
+      await service.update('', '', {} as CacheUpdateDto);
     });
     it('should be call external patch api', () => {
       expect(http.patch).toBeCalled();
@@ -82,7 +85,7 @@ describe('# EdgeService', () => {
 
   describe('## Delete', () => {
     beforeEach(async () => {
-      await service.delete('');
+      await service.delete('', '');
     });
     it('should be call external get api', () => {
       expect(http.delete).toBeCalled();

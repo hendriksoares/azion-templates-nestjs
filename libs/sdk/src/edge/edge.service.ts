@@ -6,7 +6,7 @@ import { EdgeApplicationCreateDto, EdgeApplicationUpdateDto } from './dtos';
 import { HttpService } from '@nestjs/axios';
 
 /**
- * A class service to operate over edge application on Azion (Manager)
+ * A class service to manage edge application on Azion
  */
 @Injectable()
 export class EdgeService extends BaseService {
@@ -28,7 +28,7 @@ export class EdgeService extends BaseService {
     return result;
   }
 
-  /** Service to update a edge application
+  /** Service to update an edge application
    * @param data EdgeApplicationUpdateDto
    * @returns Promise<EdgeApplicationDto>
    */
@@ -55,7 +55,7 @@ export class EdgeService extends BaseService {
     return result;
   }
 
-  /** Service to delete a adge application by id
+  /** Service to delete an edge application by id
    * @param id string
    * @returns Promise<EdgeApplicationDto>
    */

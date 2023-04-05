@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EdgeService } from './edge.service';
+import { DomainService } from './domain.service';
 import { HttpModule, HttpService } from '@nestjs/axios';
-import { EdgeApplicationCreateDto, EdgeApplicationUpdateDto } from './dtos';
-import { map, of } from 'rxjs';
+import { of } from 'rxjs';
+import { DomainCreateDto, DomainUpdateDto } from './dtos';
 
-describe('# EdgeService', () => {
-  let service: EdgeService;
+describe('# DomainService', () => {
+  let service: DomainService;
   let http: HttpService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule],
-      providers: [EdgeService],
+      providers: [DomainService],
     })
       .overrideProvider(HttpService)
       .useValue({
         post: jest.fn().mockReturnValue({
-          pipe: jest.fn().mockReturnValue(of(map((x: any) => x.data.results))),
+          pipe: jest.fn().mockReturnValue(of({})),
         }),
         get: jest.fn().mockReturnValue({
           pipe: jest.fn().mockReturnValue(of({})),
@@ -31,7 +31,7 @@ describe('# EdgeService', () => {
 
       .compile();
 
-    service = module.get<EdgeService>(EdgeService);
+    service = module.get<DomainService>(DomainService);
     http = module.get<HttpService>(HttpService);
   });
 
@@ -55,7 +55,7 @@ describe('# EdgeService', () => {
 
   describe('## Create', () => {
     beforeEach(async () => {
-      await service.create({} as EdgeApplicationCreateDto);
+      await service.create({} as DomainCreateDto);
     });
     it('should be call external post api', () => {
       expect(http.post).toBeCalled();
@@ -73,7 +73,7 @@ describe('# EdgeService', () => {
 
   describe('## Update', () => {
     beforeEach(async () => {
-      await service.update({} as EdgeApplicationUpdateDto);
+      await service.update({} as DomainUpdateDto);
     });
     it('should be call external patch api', () => {
       expect(http.patch).toBeCalled();
