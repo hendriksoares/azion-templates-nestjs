@@ -27,6 +27,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/sdk/tsconfig.lib.json"
       }
+    },
+    "aws-wordpress": {
+      "type": "application",
+      "root": "apps/aws-wordpress",
+      "entryFile": "main",
+      "sourceRoot": "apps/aws-wordpress/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/aws-wordpress/tsconfig.app.json"
+      }
     }
   }
 }
